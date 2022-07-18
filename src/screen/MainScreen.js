@@ -1,8 +1,9 @@
 import { View, StyleSheet, Image, ScrollView, StatusBar } from "react-native";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useCallback } from "react";
+import * as SplashScreen from 'expo-splash-screen';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Location from 'expo-location';
+import * as Font from 'expo-font';
 
 import { WeatherService } from "../services/WeatherService";
 import { getlocation, addInfoSlider, setLoad, setDaily, activeInfoWeather } from "../redux/actionWeather";
@@ -17,6 +18,16 @@ import { Humidity } from "../components/Humidity";
 import { Sunrise } from "../components/Sunrise";
 
 import { THEME } from "../theme/theme";
+
+SplashScreen.preventAutoHideAsync();
+
+async function loadApplication() {
+   await Font.loadAsync({
+      'helvetica-regular': require('../../assets/fonts/HelveticaRegular.ttf'),
+      'helvetica-light': require('../../assets/fonts/HelveticaLight.ttf'),
+      'helvetica-bold': require('../../assets/fonts/HelveticaBold.ttf')
+   });
+}
 
 export const MainScreen = () => {
    const waetherIcons = {
@@ -89,45 +100,64 @@ export const MainScreen = () => {
    }
 
    const [modalVisible, setModalVisible] = useState(false);
+   const [appIsReady, setAppIsReady] = useState(false);
 
-   const location = useSelector(state => state.location);
    const dispatch = useDispatch();
    const { getWeatherHours, getWeatherDaily } = WeatherService();
 
    useEffect(() => {
       (async () => {
-         let { status } = await Location.requestForegroundPermissionsAsync();
-         if (status !== 'granted') {
-            console.log('Permission to access location was denied');
-            return;
+         try {
+            loadApplication();
+
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+               console.log('Permission to access location was denied');
+               return;
+            }
+
+            let location = await Location.getCurrentPositionAsync({});
+
+            const loc = {
+               latitude: location.coords.latitude,
+               longitude: location.coords.longitude
+            }
+
+            dispatch(getlocation(loc));
+            getWeatherDaily(loc).then(data => {
+               const res = addIcon(data);
+
+               dispatch(setDaily(res));
+            });
+            getWeatherHours(loc).then(data => {
+               const res = addIcon(data);
+
+               dispatch(addInfoSlider(res));
+               dispatch(activeInfoWeather(res));
+               dispatch(setLoad(true));
+            });
+
+         } catch {
+            console.warn(e);
+         } finally {
+            setAppIsReady(true);
          }
-
-         let location = await Location.getCurrentPositionAsync({});
-
-         const loc = {
-            latitude: location.coords.latitude,
-            longitude: location.coords.longitude
-         }
-
-         dispatch(getlocation(loc));
-         getWeatherDaily(loc).then(data => {
-            const res = addIcon(data);
-
-            dispatch(setDaily(res));
-         });
-         getWeatherHours(loc).then(data => {
-            const res = addIcon(data);
-
-            dispatch(addInfoSlider(res));
-            dispatch(activeInfoWeather(res));
-            dispatch(setLoad(true));
-         });
-
       })();
    }, []);
 
+   const onLayoutRootView = useCallback(async () => {
+      if (appIsReady) {
+         await SplashScreen.hideAsync();
+      }
+   }, [appIsReady]);
+
+   if (!appIsReady) {
+      return null;
+   }
+
+
    return (
-      <View style={styles.wrapper}>
+      <View style={styles.wrapper} onLayout={onLayoutRootView}>
          <Image style={styles.img} source={require('../../assets/background.png')} />
          <View style={styles.wrapperPadding}>
             <ScrollView  >
