@@ -1,7 +1,7 @@
 import Slider from '@react-native-community/slider';
 import { View, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { dayOrWeek, setActiveWeather } from '../redux/actionWeather';
+import { setActiveWeather } from '../redux/actionWeather';
 import { WeatherMiniIcon } from './WeatherMiniIcon';
 import { WeatherMiniIconLoad } from './load/WeatherMiniIconLoad';
 import { THEME } from '../theme/theme';
