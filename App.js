@@ -2,7 +2,7 @@ import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 import { useState } from 'react';
 import { Provider } from 'react-redux';
-
+// гавнбк
 
 import store from './src/redux/StoreWeather';
 
