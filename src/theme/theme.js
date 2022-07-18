@@ -1,0 +1,5 @@
+export const THEME = {
+   BACKGROUND_COLOR: '#373737',
+   FONT_SIZE: 12,
+   PADDING_HOR: 20
+}

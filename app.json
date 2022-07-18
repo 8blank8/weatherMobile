@@ -1,0 +1,34 @@
+{
+   "expo": {
+      "name": "weather",
+      "slug": "weather",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "icon": "./assets/weathers/oblachno.png",
+      "userInterfaceStyle": "light",
+      "splash": {
+         "image": "./assets/splashBack.png",
+         "resizeMode": "cover",
+         "backgroundColor": "#9775A5"
+      },
+      "updates": {
+         "fallbackToCacheTimeout": 0
+      },
+      "assetBundlePatterns": [
+         "**/*"
+      ],
+      "ios": {
+         "supportsTablet": true
+      },
+      "android": {
+         "adaptiveIcon": {
+            "foregroundImage": "./assets/weathers/oblachno.png",
+            "backgroundColor": "#9775A5"
+         },
+         "package": "weather.app"
+      },
+      "web": {
+         "favicon": "./assets/favicon.png"
+      }
+   }
+}
