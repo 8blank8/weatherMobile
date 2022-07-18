@@ -10,7 +10,7 @@ export const WeatherIcon = () => {
    return (
       <View style={styles.wrapper}>
          <Image source={load ? infoSlider[activeWeather].ellipse : require('../../assets/ellipse.png')} style={styles.ellipse} />
-         <Image source={load ? infoSlider[activeWeather].icon : require('../../assets/weathers/sun.png')} />
+         <Image source={load ? infoSlider[activeWeather].icon : require('../../assets/weathers/sun.png')} style={styles.img} />
       </View>
    )
 }
@@ -24,5 +24,9 @@ const styles = StyleSheet.create({
    ellipse: {
       position: "absolute",
       top: -27,
+   },
+   img: {
+      width: 200,
+      height: 200
    }
 })

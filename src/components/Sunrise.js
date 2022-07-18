@@ -6,7 +6,6 @@ import { THEME } from "../theme/theme";
 import { TextRegular } from "../ui/TextRegular";
 import { useSelector } from "react-redux";
 import sun from '../../assets/sun.png';
-import moon from '../../assets/weathers/Moon.png';
 
 export const Sunrise = (props) => {
 
@@ -23,13 +22,10 @@ export const Sunrise = (props) => {
          setLineValue(Math.round(((nowDate - daily[0].sunrise) * 100) / (daily[0].sunset - daily[0].sunrise)));
          setTimeSunrise(daily[0].timeSunrise);
          setTimeSunset(daily[0].timeSunset);
-      } else {
+      } else if (daily.length !== 0 && nowDate <= daily[1].sunset) {
          setTimeSunrise(daily[1].timeSunrise);
          setTimeSunset(daily[1].timeSunset);
       }
-      // else if (daily.length !== 0 && nowDate >= daily[0].moonrise && nowDate <= daily[0].moonset) {
-      //    setLineValue(Math.round(((nowDate - daily[1].moonrise) * 100) / (daily[1].moonset - daily[1].moonrise)));
-      // }
    })
 
    useEffect(() => {
