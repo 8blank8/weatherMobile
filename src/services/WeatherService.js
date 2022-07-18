@@ -65,7 +65,7 @@ export const WeatherService = () => {
                temp: Math.round(item.temp.max),
                humidity: item.humidity,
                wind_speed: Math.round(item.wind_speed),
-               pop: item.pop * 100,
+               pop: Math.round(item.pop * 100),
                id: item.weather[0].id,
                description: item.weather[0].description,
                feels_like: Math.round(item.feels_like.day),
