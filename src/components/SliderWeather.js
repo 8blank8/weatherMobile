@@ -18,7 +18,6 @@ export const SliderWeather = () => {
 
    const content = infoSlider.map((item, i) => {
       const arr = [];
-
       if (dayWeek === true) {
          if (i % 2 === 0) {
             arr.push(<WeatherMiniIcon key={Date.now() + Math.random()} data={item} day={dayWeek} />);

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 export const WeatherIcon = () => {
 
    const activeWeather = useSelector(state => state.activeWeather);
-   const infoSlider = useSelector(state => state.infoSlider);
+   const infoSlider = useSelector(state => state.activeInfoWeather);
    const load = useSelector(state => state.load);
 
    return (
