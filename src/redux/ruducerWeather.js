@@ -6,7 +6,8 @@ const initialState = {
    load: false,
    daily: [],
    dayOrWeek: true,
-   activeInfoWeather: []
+   activeInfoWeather: [],
+   cityName: { city: '-' }
 }
 
 export const reducerWeather = (state = initialState, action) => {
@@ -45,6 +46,11 @@ export const reducerWeather = (state = initialState, action) => {
          return {
             ...state,
             activeInfoWeather: action.payload
+         }
+      case 'SET_CITY_NAME':
+         return {
+            ...state,
+            cityName: action.payload
          }
       default:
          return state;

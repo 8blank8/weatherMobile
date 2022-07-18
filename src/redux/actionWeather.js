@@ -46,3 +46,10 @@ export const activeInfoWeather = (weather) => {
       payload: weather
    }
 }
+
+export const setCityName = (name) => {
+   return {
+      type: 'SET_CITY_NAME',
+      payload: name
+   }
+}

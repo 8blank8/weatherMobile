@@ -1,5 +1,6 @@
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Feather } from '@expo/vector-icons';
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextLight } from "../ui/TextLight";
 import { dayOrWeek, activeInfoWeather } from '../redux/actionWeather';
@@ -12,15 +13,18 @@ export const ToogleWeather = () => {
    const infoSlider = useSelector(state => state.infoSlider);
    const daily = useSelector(state => state.daily);
 
+   const [textDayWeek, setTextDayWeek] = useState(true);
+
    return (
       <View style={styles.wrapper}>
          <Image style={styles.img} source={require('../../assets/backgroundToogle.png')} />
          <TouchableOpacity style={styles.toucheble} onPress={() => {
             dayWeek ? dispatch(activeInfoWeather(daily)) : dispatch(activeInfoWeather(infoSlider));
             dispatch(dayOrWeek());
+            setTextDayWeek(!textDayWeek);
          }}>
             <TextLight>
-               Прогноз на неделю
+               Прогноз на {textDayWeek ? 'неделю' : 'день'}
             </TextLight>
             <View style={styles.tringle}><Feather name="triangle" color={'#fff'} size={15} /></View>
          </TouchableOpacity>

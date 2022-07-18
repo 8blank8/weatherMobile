@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as Location from 'expo-location';
 import * as Font from 'expo-font';
 
+import { LocationService } from '../services/LocationService';
 import { WeatherService } from "../services/WeatherService";
-import { getlocation, addInfoSlider, setLoad, setDaily, activeInfoWeather } from "../redux/actionWeather";
+import { getlocation, addInfoSlider, setLoad, setDaily, activeInfoWeather, setCityName } from "../redux/actionWeather";
 
 import { Navbar } from "../components/Navbar";
 import { WeatherIcon } from "../components/WeatherIcon";
@@ -104,6 +105,7 @@ export const MainScreen = () => {
 
    const dispatch = useDispatch();
    const { getWeatherHours, getWeatherDaily } = WeatherService();
+   const { getCityName } = LocationService();
 
    useEffect(() => {
       (async () => {
@@ -122,7 +124,7 @@ export const MainScreen = () => {
                latitude: location.coords.latitude,
                longitude: location.coords.longitude
             }
-
+            getCityName(location.coords.latitude, location.coords.longitude).then(data => dispatch(setCityName(data)));
             dispatch(getlocation(loc));
             getWeatherDaily(loc).then(data => {
                const res = addIcon(data);
