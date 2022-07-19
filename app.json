@@ -4,12 +4,11 @@
       "slug": "weather",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/weathers/oblachno.png",
+      "icon": "./assets/weather/oblachno.png",
       "userInterfaceStyle": "light",
       "splash": {
-         "image": "./assets/splashBack.png",
-         "resizeMode": "cover",
-         "backgroundColor": "#9775A5"
+         "image": "./assets/splash2.png",
+         "resizeMode": "cover"
       },
       "updates": {
          "fallbackToCacheTimeout": 0
@@ -22,7 +21,7 @@
       },
       "android": {
          "adaptiveIcon": {
-            "foregroundImage": "./assets/weathers/oblachno.png",
+            "foregroundImage": "./assets/weather/oblachno.png",
             "backgroundColor": "#9775A5"
          },
          "package": "weather.app"
