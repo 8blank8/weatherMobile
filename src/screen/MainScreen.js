@@ -31,6 +31,13 @@ async function loadApplication() {
 }
 
 export const MainScreen = () => {
+   const [modalVisible, setModalVisible] = useState(false);
+   const [appIsReady, setAppIsReady] = useState(false);
+   const dispatch = useDispatch();
+   const { getWeatherHours, getWeatherDaily } = WeatherService();
+   const { getCityName } = LocationService();
+   const date = new Date();
+
    const waetherIcons = {
       cloud: require('../../assets/weathers/cloud.png'),
       oblachno: require('../../assets/weathers/oblachno.png'),
@@ -87,17 +94,34 @@ export const MainScreen = () => {
                ellipse: waetherIcons.ellipseBlue
             }
          } else if (item.id === 800) {
-            return {
-               ...item,
-               icon: waetherIcons.sun,
-               ellipse: waetherIcons.ellipse
+            if (date.getHours() > 23 || date.getHours() > 0 && date.getHours() < 5) {
+               return {
+                  ...item,
+                  icon: waetherIcons.moon,
+                  ellipse: waetherIcons.ellipse
+               }
+            } else {
+               return {
+                  ...item,
+                  icon: waetherIcons.sun,
+                  ellipse: waetherIcons.ellipse
+               }
             }
          } else if (item.id === 801) {
-            return {
-               ...item,
-               icon: waetherIcons.oblachno,
-               ellipse: waetherIcons.ellipse
+            if (date.getHours() > 23 || date.getHours() > 0 && date.getHours() < 5) {
+               return {
+                  ...item,
+                  icon: waetherIcons.cloudMoon,
+                  ellipse: waetherIcons.ellipse
+               }
+            } else {
+               return {
+                  ...item,
+                  icon: waetherIcons.oblachno,
+                  ellipse: waetherIcons.ellipse
+               }
             }
+
          } else if (item.id >= 802 && item.id <= 804) {
             return {
                ...item,
@@ -111,12 +135,6 @@ export const MainScreen = () => {
       return res;
    }
 
-   const [modalVisible, setModalVisible] = useState(false);
-   const [appIsReady, setAppIsReady] = useState(false);
-
-   const dispatch = useDispatch();
-   const { getWeatherHours, getWeatherDaily } = WeatherService();
-   const { getCityName } = LocationService();
 
    useEffect(() => {
       (async () => {

@@ -10,7 +10,6 @@ import sun from '../../assets/sun.png';
 export const Sunrise = (props) => {
 
    const daily = useSelector(state => state.daily);
-   console.log(daily[0].moonrise)
    const [timeSunrise, setTimeSunrise] = useState('--:--');
    const [timeSunset, setTimeSunset] = useState('--:--');
    const [lineValue, setLineValue] = useState(1);

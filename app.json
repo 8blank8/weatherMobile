@@ -4,7 +4,7 @@
       "slug": "weather",
       "version": "1.0.0",
       "orientation": "portrait",
-      "icon": "./assets/weather/oblachno.png",
+      "icon": "./assets/weathers/oblachno.png",
       "userInterfaceStyle": "light",
       "splash": {
          "image": "./assets/splash2.png",
@@ -21,7 +21,7 @@
       },
       "android": {
          "adaptiveIcon": {
-            "foregroundImage": "./assets/weather/oblachno.png",
+            "foregroundImage": "./assets/weathers/oblachno.png",
             "backgroundColor": "#9775A5"
          },
          "package": "weather.app"

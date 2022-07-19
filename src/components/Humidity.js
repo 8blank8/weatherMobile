@@ -71,5 +71,10 @@ const styles = StyleSheet.create({
 
    info: {
       width: 115
+   },
+
+   img: {
+      width: 150,
+      height: 125
    }
 })

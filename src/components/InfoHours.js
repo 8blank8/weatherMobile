@@ -28,7 +28,7 @@ export const InfoHours = props => {
                {load ? <TextLight style={{ fontSize: 14 }}>{weather.description}</TextLight> : <Loading style={{ height: 15, marginTop: 20 }} />}
             </View>
             <View style={styles.containerTwo}>
-               {load ? <TextRegular style={styles.textCharacters}>Осадки: {weather.pop}%</TextRegular> : <Loading style={{ height: 15, width: 93, marginTop: 5 }} />}
+               {load ? <TextRegular style={styles.textCharacters}>Осадки: {weather.pop.toFixed(0)}%</TextRegular> : <Loading style={{ height: 15, width: 93, marginTop: 5 }} />}
                {load ? <TextRegular style={styles.textCharacters}>Влажность: {weather.humidity}%</TextRegular> : <Loading style={{ height: 15, width: 93, marginTop: 5 }} />}
                {load ? <TextRegular style={styles.textCharacters}>Ветер: {weather.wind_speed} м/с</TextRegular> : <Loading style={{ height: 15, width: 93, marginTop: 5 }} />}
             </View>
