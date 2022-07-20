@@ -16,7 +16,7 @@ export const Navbar = () => {
             <FontAwesome5 name='map-marker-alt' size={20} color='#fff' >
                <TextRegular style={styles.text}> {cityName}</TextRegular>
             </FontAwesome5 >
-            {/* <Menu /> */}
+            <Menu />
          </View>
       </View>
    )

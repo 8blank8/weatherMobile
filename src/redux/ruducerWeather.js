@@ -1,13 +1,13 @@
 const initialState = {
    temp: 14,
    location: {},
-   infoSlider: [],
    activeWeather: 0,
    load: false,
    daily: [],
    dayOrWeek: true,
    activeInfoWeather: [],
-   cityName: { city: '-' }
+   cityName: { city: '-' },
+   modal: false,
 }
 
 export const reducerWeather = (state = initialState, action) => {
@@ -17,11 +17,6 @@ export const reducerWeather = (state = initialState, action) => {
             ...state,
             location: action.payload
          };
-      case 'ADD_INFO_SLIDER':
-         return {
-            ...state,
-            infoSlider: action.payload
-         }
       case 'ACTIVE_WEATHER':
          return {
             ...state,
@@ -51,6 +46,11 @@ export const reducerWeather = (state = initialState, action) => {
          return {
             ...state,
             cityName: action.payload
+         }
+      case 'SET_MODAL':
+         return {
+            ...state,
+            modal: action.payload
          }
       default:
          return state;

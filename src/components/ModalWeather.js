@@ -3,15 +3,18 @@ import { Modal, StyleSheet, View } from "react-native";
 import { Navbar } from "./Navbar";
 import { AddCityModal } from "./AddCityModal";
 import { BlurView } from 'expo-blur';
+import { useSelector } from "react-redux";
 
 
+export const ModalWeather = () => {
 
-export const ModalWeather = ({ modalVisible }) => {
+   const modal = useSelector(state => state.modal);
+
    return (
       <Modal
          animationType="fade"
          transparent={true}
-         visible={modalVisible}
+         visible={modal}
       >
          <BlurView
             tint="dark"
@@ -29,8 +32,8 @@ export const ModalWeather = ({ modalVisible }) => {
 
 const styles = StyleSheet.create({
    wrapper: {
-      paddingHorizontal: 20,
-      paddingTop: 17,
+      paddingHorizontal: 0,
+      paddingTop: 0,
    },
    blurView: {
       flex: 1,

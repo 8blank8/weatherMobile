@@ -9,7 +9,7 @@ import { Loading } from "./load/Loading";
 export const Humidity = () => {
 
    const activeWeather = useSelector(state => state.activeWeather);
-   const weather = useSelector(state => state.infoSlider[activeWeather]);
+   const weather = useSelector(state => state.activeInfoWeather[activeWeather]);
    const load = useSelector(state => state.load);
 
    return (

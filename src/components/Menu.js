@@ -1,15 +1,16 @@
 import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../redux/actionWeather';
 
 export const Menu = () => {
-
+   const dispatch = useDispatch();
+   const modal = useSelector(state => state.modal);
 
    return (
-      <TouchableOpacity style={styles.a} onPress={() => console.log(1)}>
-         <View style={styles.wrapper}>
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-            <View style={styles.circle} />
-         </View>
+      <TouchableOpacity style={styles.wrapper} onPress={() => dispatch(setModal(!modal))}>
+         <View style={styles.circle} />
+         <View style={styles.circle} />
+         <View style={styles.circle} />
       </TouchableOpacity>
    )
 }
@@ -19,9 +20,11 @@ export const Menu = () => {
 const styles = StyleSheet.create({
    wrapper: {
       width: 35,
-      height: 10,
+      height: 20,
       flexDirection: 'row',
-      justifyContent: 'space-between'
+      justifyContent: 'space-between',
+      paddingTop: 10,
+      zIndex: 1
    },
    circle: {
       width: 6,
@@ -30,8 +33,9 @@ const styles = StyleSheet.create({
       borderRadius: 4,
    },
    a: {
-      // width: 100,
-      // height: 100,
-      // backgroundColor: '#000'
+      width: 35,
+      height: 20,
+      borderColor: 'red',
+      borderWidth: 1,
    }
 })

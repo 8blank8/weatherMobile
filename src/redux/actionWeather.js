@@ -6,13 +6,6 @@ export const getlocation = (location) => {
    }
 }
 
-export const addInfoSlider = (data) => {
-   return {
-      type: 'ADD_INFO_SLIDER',
-      payload: data
-   }
-}
-
 export const setActiveWeather = (weather) => {
    return {
       type: 'ACTIVE_WEATHER',
@@ -51,5 +44,12 @@ export const setCityName = (name) => {
    return {
       type: 'SET_CITY_NAME',
       payload: name
+   }
+}
+
+export const setModal = (modal) => {
+   return {
+      type: 'SET_MODAL',
+      payload: modal
    }
 }

@@ -7,7 +7,7 @@ import * as Font from 'expo-font';
 
 import { LocationService } from '../services/LocationService';
 import { WeatherService } from "../services/WeatherService";
-import { getlocation, addInfoSlider, setLoad, setDaily, activeInfoWeather, setCityName } from "../redux/actionWeather";
+import { getlocation, setLoad, setDaily, activeInfoWeather, setCityName } from "../redux/actionWeather";
 
 import { Navbar } from "../components/Navbar";
 import { WeatherIcon } from "../components/WeatherIcon";
@@ -31,7 +31,6 @@ async function loadApplication() {
 }
 
 export const MainScreen = () => {
-   const [modalVisible, setModalVisible] = useState(false);
    const [appIsReady, setAppIsReady] = useState(false);
    const dispatch = useDispatch();
    const { getWeatherHours, getWeatherDaily } = WeatherService();
@@ -163,7 +162,6 @@ export const MainScreen = () => {
             getWeatherHours(loc).then(data => {
                const res = addIcon(data);
 
-               dispatch(addInfoSlider(res));
                dispatch(activeInfoWeather(res));
                dispatch(setLoad(true));
             });
@@ -201,7 +199,7 @@ export const MainScreen = () => {
             </ScrollView>
             <ToogleWeather />
          </View>
-         <ModalWeather modalVisible={modalVisible} />
+         <ModalWeather />
       </View>
    )
 }
