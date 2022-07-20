@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TextLight } from "../ui/TextLight";
-import { dayOrWeek, activeInfoWeather } from '../redux/actionWeather';
+import { dayOrWeek, activeInfoWeather, setDayWeek } from '../redux/actionWeather';
 
 import { THEME } from '../theme/theme';
 
@@ -12,8 +12,8 @@ export const ToogleWeather = () => {
    const dayWeek = useSelector(state => state.dayOrWeek);
    const infoSlider = useSelector(state => state.infoSlider);
    const daily = useSelector(state => state.daily);
+   const textDayWeek = useSelector(state => state.textDayWeek);
 
-   const [textDayWeek, setTextDayWeek] = useState(true);
 
    return (
       <View style={styles.wrapper}>
@@ -21,7 +21,7 @@ export const ToogleWeather = () => {
          <TouchableOpacity style={styles.toucheble} onPress={() => {
             dayWeek ? dispatch(activeInfoWeather(daily)) : dispatch(activeInfoWeather(infoSlider));
             dispatch(dayOrWeek());
-            setTextDayWeek(!textDayWeek);
+            dispatch(setDayWeek(!textDayWeek));
          }}>
             <TextLight>
                Прогноз на {textDayWeek ? 'неделю' : 'день'}

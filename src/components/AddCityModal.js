@@ -4,7 +4,7 @@ import { LocationService } from '../services/LocationService';
 import { EvilIcons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setLoad, setDaily, activeInfoWeather, setCityName, setModal } from '../redux/actionWeather';
+import { setLoad, setDaily, activeInfoWeather, setCityName, setModal, setDayWeek } from '../redux/actionWeather';
 import { WeatherService } from '../services/WeatherService';
 import { IconService } from '../services/IconService';
 
@@ -30,7 +30,7 @@ export const AddCityModal = () => {
    const content = citys && citys.map(({ city, lat, lon }) => {
       return (
          <TouchableOpacity style={styles.touch} key={Date.now() + Math.random()} onPress={() => {
-            dispatch(setCityName({ city }))
+            dispatch(setCityName({ city }));
             getWeatherDaily({ latitude: lat, longitude: lon }).then(data => {
                const res = addIcon(data);
                dispatch(setDaily(res));
@@ -41,6 +41,7 @@ export const AddCityModal = () => {
                dispatch(activeInfoWeather(res));
                dispatch(setLoad(true));
             });
+            dispatch(setDayWeek(true));
             dispatch(setModal(false));
          }}>
             <TextLight style={styles.cityText}>{city}</TextLight>

@@ -8,7 +8,7 @@ import * as Font from 'expo-font';
 import { LocationService } from '../services/LocationService';
 import { WeatherService } from "../services/WeatherService";
 import { IconService } from '../services/IconService';
-import { getlocation, setLoad, setDaily, activeInfoWeather, setCityName } from "../redux/actionWeather";
+import { getlocation, setLoad, setDaily, activeInfoWeather, setCityName, setInfoSlider } from "../redux/actionWeather";
 
 import { Navbar } from "../components/Navbar";
 import { WeatherIcon } from "../components/WeatherIcon";
@@ -59,12 +59,11 @@ export const MainScreen = () => {
             dispatch(getlocation(loc));
             getWeatherDaily(loc).then(data => {
                const res = addIcon(data);
-
                dispatch(setDaily(res));
             });
             getWeatherHours(loc).then(data => {
                const res = addIcon(data);
-
+               dispatch(setInfoSlider(res));
                dispatch(activeInfoWeather(res));
                dispatch(setLoad(true));
             });

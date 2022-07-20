@@ -8,6 +8,8 @@ const initialState = {
    activeInfoWeather: [],
    cityName: { city: '-' },
    modal: false,
+   textDayWeek: true,
+   infoSlider: []
 }
 
 export const reducerWeather = (state = initialState, action) => {
@@ -51,6 +53,16 @@ export const reducerWeather = (state = initialState, action) => {
          return {
             ...state,
             modal: action.payload
+         }
+      case 'SET_DAY_WEEK':
+         return {
+            ...state,
+            textDayWeek: action.payload
+         }
+      case 'SET_INFO_SLIDER':
+         return {
+            ...state,
+            infoSlider: action.payload
          }
       default:
          return state;

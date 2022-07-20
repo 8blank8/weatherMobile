@@ -42,7 +42,7 @@ export const LocationService = () => {
 
    const _transformCityCoords = (item) => {
       const arr = item.suggestions.map(item => {
-         if (item.data.fias_level === '4' || item.data.fias_level === '6') {
+         if (item.data.fias_level === '4' || item.data.fias_level === '6' || item.data.fias_level === '1') {
             return {
                city: item.data.city,
                lat: item.data.geo_lat,
@@ -51,7 +51,17 @@ export const LocationService = () => {
          }
       })
 
-      return arr.filter(Boolean);
+      const newArr = arr.filter(item => {
+         if (item !== undefined) {
+            if (item.city !== null) {
+               return item;
+            }
+         }
+      });
+      const table = {};
+      const res = newArr.filter(({ city }) => (!table[city] && (table[city] = 1)));
+
+      return res;
    }
 
    return { getCityName, getCityCoords };

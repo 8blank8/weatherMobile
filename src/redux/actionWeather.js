@@ -53,3 +53,17 @@ export const setModal = (modal) => {
       payload: modal
    }
 }
+
+export const setDayWeek = (bool) => {
+   return {
+      type: 'SET_DAY_WEEK',
+      payload: bool
+   }
+}
+
+export const setInfoSlider = (arr) => {
+   return {
+      type: 'SET_INFO_SLIDER',
+      payload: arr
+   }
+}
