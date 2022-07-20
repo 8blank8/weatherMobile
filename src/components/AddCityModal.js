@@ -2,10 +2,16 @@ import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { TextLight } from '../ui/TextLight';
 import { LocationService } from '../services/LocationService';
 import { EvilIcons } from '@expo/vector-icons';
-import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setLoad, setDaily, activeInfoWeather, setCityName, setModal } from '../redux/actionWeather';
+import { WeatherService } from '../services/WeatherService';
+import { IconService } from '../services/IconService';
 
 export const AddCityModal = () => {
+   const dispatch = useDispatch();
+   const { getWeatherDaily, getWeatherHours } = WeatherService();
+   const { addIcon } = IconService();
    let time = null;
    const { getCityCoords } = LocationService();
    const [text, setText] = useState('');
@@ -21,9 +27,22 @@ export const AddCityModal = () => {
       }, 500)
    }
 
-   const content = citys && citys.map(({ city }) => {
+   const content = citys && citys.map(({ city, lat, lon }) => {
       return (
-         <TouchableOpacity style={styles.touch} key={Date.now() + Math.random()}>
+         <TouchableOpacity style={styles.touch} key={Date.now() + Math.random()} onPress={() => {
+            dispatch(setCityName({ city }))
+            getWeatherDaily({ latitude: lat, longitude: lon }).then(data => {
+               const res = addIcon(data);
+               dispatch(setDaily(res));
+            });
+            getWeatherHours({ latitude: lat, longitude: lon }).then(data => {
+               const res = addIcon(data);
+
+               dispatch(activeInfoWeather(res));
+               dispatch(setLoad(true));
+            });
+            dispatch(setModal(false));
+         }}>
             <TextLight style={styles.cityText}>{city}</TextLight>
          </TouchableOpacity>
       )
